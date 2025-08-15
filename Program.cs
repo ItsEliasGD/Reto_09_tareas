@@ -41,6 +41,7 @@ namespace Reto_09_tareas
                         break;
                     default:
                         Console.WriteLine("Opción no válida.");
+                        PausaYLimpia();
                         break;
                 }
             }
@@ -67,6 +68,8 @@ namespace Reto_09_tareas
             {
                 Console.WriteLine($"Error al listar tareas: {ex.Message}");
             }
+
+            PausaYLimpia();
         }
 
         static void FiltrarTareas()
@@ -91,6 +94,8 @@ namespace Reto_09_tareas
             {
                 Console.WriteLine($"Error al filtrar tareas: {ex.Message}");
             }
+
+            PausaYLimpia();
         }
 
         static void CrearTarea()
@@ -98,10 +103,10 @@ namespace Reto_09_tareas
             Console.Write("Ingrese título de la tarea (3-60 caracteres): ");
             var titulo = Console.ReadLine() ?? string.Empty;
 
-            // Validación por regex (sin \ sobrante)
             if (!Regex.IsMatch(titulo.Trim(), @"^.{3,60}$"))
             {
                 Console.WriteLine("Título inválido. Debe tener entre 3 y 60 caracteres.");
+                PausaYLimpia();
                 return;
             }
 
@@ -123,6 +128,15 @@ namespace Reto_09_tareas
             {
                 Console.WriteLine($"Error al crear tarea: {ex.Message}");
             }
+
+            PausaYLimpia();
+        }
+
+        static void PausaYLimpia()
+        {
+            Console.WriteLine("\nPulsa cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }
